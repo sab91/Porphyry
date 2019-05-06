@@ -9,7 +9,8 @@ import Corpora from '../Corpora/Corpora.jsx';
 import Header from '../Header/Header.jsx';
 import ViewpointCreator from '../Viewpoint/ViewpointCreator.jsx';
 import Authenticated from '../Authenticated/Authenticated.jsx';
-
+import nuage from '../../images/logo-nuage.png'
+import baseLine from '../../images/baseline_reorder_black_18dp.png'
 import '../../styles/App.css';
 
 class Portfolio extends Component {
@@ -41,7 +42,15 @@ class Portfolio extends Component {
           <div className="App-content row">
             <div className="col-md-4 p-4">
               <div className="Description">
-                <h2 className="h4 font-weight-bold text-center">Points de vue</h2>
+                <h2 className="h4 font-weight-bold text-center">
+                  <Link to="/cloudWord">
+                    <img style={{width: '50px', height: '50px'}} src={nuage} alt="nuage"/>
+                  </Link>
+                  <Link to="/">
+                    <img style={{width: '50px', height: '50px'}} src={baseLine} alt="base ligne"/>
+                  </Link>
+                  Points de vue
+                </h2>
                 <div className="p-3">
                   <ViewpointCreator />
                   {viewpoints}

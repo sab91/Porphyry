@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Hypertopic from 'hypertopic';
 import groupBy from 'json-groupby';

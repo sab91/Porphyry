@@ -375,3 +375,21 @@ ul.Outliner,
 .btn:not(.btn-xs) .oi {
   vertical-align: middle;
 }
+.tableCaseDefLeft{
+  margin-left:1%;
+  width:100%;
+  padding-left:0;
+  padding-right:0;
+}
+.tableCaseDefLeftInterne{
+  border-width:1px;
+  border-style:solid;
+  width:100%;
+  margin-right:0%;
+}
+.tableCaseDefRight{
+  margin-left:0;
+  width:100%;
+  padding-left:0;
+  padding-right:0;
+}
