@@ -43,12 +43,6 @@ class Portfolio extends Component {
             <div className="col-md-4 p-4">
               <div className="Description">
                 <h2 className="h4 font-weight-bold text-center">
-                  <Link to="/cloudWord">
-                    <img style={{width: '50px', height: '50px'}} src={nuage} alt="nuage"/>
-                  </Link>
-                  <Link to="/">
-                    <img style={{width: '50px', height: '50px'}} src={baseLine} alt="base ligne"/>
-                  </Link>
                   Points de vue
                 </h2>
                 <div className="p-3">
@@ -198,9 +192,7 @@ class Portfolio extends Component {
           for (let itemId in data[corpus.id]) {
             if (!['id','name','user'].includes(itemId)) {
               let item = data[corpus.id][itemId];
-              if (!item.name || !item.name.length || !item.thumbnail || !item.thumbnail.length) {
-                console.log(itemId, "has no name or thumbnail!", item);
-              } else {
+              if (!(!item.name || !item.name.length)){
                 item.id = itemId;
                 item.corpus = corpus.id;
                 items.push(item);
@@ -228,7 +220,7 @@ class Portfolio extends Component {
   _getCorpora() {
     let ids = this.state.corpora.map(c => c.id);
     return (
-      <Corpora ids={ids} from={this.state.items.length} items={this.state.selectedItems} />
+      <Corpora ids={ids} from={this.state.items.length} items={this.state.selectedItems} viewpoint={this.state.viewpoints}/>
     );
   }
 }

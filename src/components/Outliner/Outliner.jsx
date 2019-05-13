@@ -276,7 +276,7 @@ class Node extends React.Component {
     let change=this.props.change;
     let switchOpen = () => {
       this.setState({open:!this.state.open});
-    }
+    };
     var isNew=this.props.me.new;
     let switchEdit = (e) => {
       e.stopPropagation();
@@ -286,13 +286,13 @@ class Node extends React.Component {
         }
         return {edit:!previousState.edit};
       });
-    }
+    };
     let commitEdit = (e) => {
       let newName=e.target.value;
       change(this.props.id,{name:newName,new:false});
       isNew=false;
       switchEdit(e);
-    }
+    };
     let handleInput = (e) => {
       switch(e.key) {
         case "Enter":
@@ -309,7 +309,7 @@ class Node extends React.Component {
     let activeMe = (e) => {
       e.stopPropagation();
       this.props.activate(this.props.id);
-    }
+    };
     let thisNode;
     if (this.state.edit) {
       thisNode=<input autoFocus type='text' defaultValue={this.props.me.name} onKeyPress={handleInput} onKeyDown={handleInput} onBlur={commitEdit}/>;
@@ -374,7 +374,7 @@ class Node extends React.Component {
 
       if (draggedTopic===this.props.id || topicTree.isAncestor(draggedTopic,this.props.id)) {
         //can't be dropped into itself or its descendant
-        return;
+        
       } else if (e.currentTarget.className==="wrap") { //child
         this.setState({isDraggedInto:true});
         e.stopPropagation();
@@ -388,19 +388,19 @@ class Node extends React.Component {
       } else {
 
       }
-    }
+    };
     let onDragLeave=(e) => {
       this.setState({isDraggedAfter:false,isDraggedInto:false});
       e.preventDefault();
       e.stopPropagation();
-    }
+    };
     let onDrop=(e) => {
       this.setState({isDraggedAfter:false,isDraggedInto:false});
       let topicTree=new TopicTree(this.props.topics);
       var droppedTopic=e.dataTransfer.getData("dragContent");
       if (droppedTopic===this.props.id || topicTree.isAncestor(droppedTopic,this.props.id)) {
         //can't be dropped into itself or its descendant
-        return;
+        
       } else if (e.currentTarget.className==="wrap") { //child
         this.props.change(droppedTopic,{parent:this.props.id});
         e.stopPropagation();
@@ -410,7 +410,7 @@ class Node extends React.Component {
         e.stopPropagation();
         e.preventDefault();
       }
-    }
+    };
 
     return (
       <li className={classes.join(" ")}

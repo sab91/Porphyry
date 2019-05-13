@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Portfolio from '../Portfolio/Portfolio.jsx';
 import Item from '../Item/Item.jsx';
 import Outliner from '../Outliner/Outliner.jsx';
-import Cloudword from '../cloudWord/cloudWord.jsx'
 
 class App extends React.Component {
 
@@ -13,7 +12,6 @@ class App extends React.Component {
         <Switch>
           <Route path="/item/:corpus/:item" component={Item} />
           <Route path="/viewpoint/:id" component={Outliner} />
-          <Route path="/cloudWord/" component={Cloudword} />
           <Route path="/" component={Portfolio} />
         </Switch>
       </Router>

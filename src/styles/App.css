@@ -375,21 +375,22 @@ ul.Outliner,
 .btn:not(.btn-xs) .oi {
   vertical-align: middle;
 }
-.tableCaseDefLeft{
-  margin-left:1%;
-  width:100%;
-  padding-left:0;
-  padding-right:0;
+.tableFragment{
+  display: table;
 }
-.tableCaseDefLeftInterne{
-  border-width:1px;
-  border-style:solid;
-  width:100%;
-  margin-right:0%;
+
+.tableFragment > div{
+  display: table-column;
 }
-.tableCaseDefRight{
-  margin-left:0;
-  width:100%;
-  padding-left:0;
-  padding-right:0;
+.textSelected {
+  background-color: #FECCCC ;
+}
+.buttonView {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  color: ivory;
 }
