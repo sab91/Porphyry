@@ -1,5 +1,7 @@
 #language: fr
 
+
+
 Fonctionnalité: Afficher la vue nuage de mot pour les catégories
 
 Contexte:
@@ -18,13 +20,17 @@ Contexte:
   Soit le fragment "n'a pas le droit" rattaché à la catégorie "je ne fonctionne plus"
   Soit le fragment "par pur plaisir" rattaché à la catégorie "c'est absurde"
 
-  Soit la vue des points de vue est normale
 
-
-
-Scénario:
+Scénario: Switcher vers la vue nuage de mots
 
   Soit "alice" le portfolio ouvert
   Quand un visiteur change de vue vers nuage de mots
   Alors la catégorie "je ne fonctionne plus" est plus grosse que "c'est absurde"
   Et la catégorie "je ne fonctionne plus" est après "c'est absurde"
+  
+Scénario: Sélectionner une catégorie du nuage de mot
+
+  Soit "alice" le portfolio ouvert
+  Quand un visiteur séléctionne une catégorie
+  Alors le mot sélectionné est différencié des autres catégories
+  Et les fragments associés sont affichés
