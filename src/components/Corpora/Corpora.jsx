@@ -15,36 +15,30 @@ class Corpora extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: "item",
-      pictures: [],
-      fragments: []
+      view: "item"
     };
   }
+
+  componentDidMount() {
+    
+  }
   render() {
-    let pictures = [];
-    let fragments = [];
-    this.props.items.forEach((data)=>{
-         if (!['id', 'name', 'user'].includes(data)) {
-           if (!data.thumbnail || !data.thumbnail.length) {
-             fragments.push(data)
-           } else {
-             pictures.push(data);
-           }
-         }
-    });
-    this.state.pictures=pictures;
-    this.state.fragments=fragments;
+    const {items} = this.props
+    
     let view = this._getView();
-    let count = this.props.items.length;
     let total = this.props.from;
     return(
       <div className="col-md-8 p-4">
         <div className="Subject">
           <h2 className="h4 font-weight-bold text-center">
-            <button className="buttonView" onClick={()=>this.setState({view : "item"})}><b>item</b></button>
-            <button className="buttonView" onClick={()=>this.setState({view : "fragment"})}><b>fragment</b></button>
+            <button className="buttonView" onClick={()=>this.setState({view : "item"})}>
+            <b style={{color: this.state.view === 'item' ? '#8b0000' : null}}>Item</b>
+            </button>
+            <button className="buttonView" onClick={()=>this.setState({view : "fragment"})}>
+            <b style={{color: this.state.view === 'fragment' ? '#8b0000' : null}}>Fragment</b>
+            </button>
             {this.props.ids.join(' + ')}
-            <span className="badge badge-pill badge-light ml-4">{count} / {total}</span>
+            <span className="badge badge-pill badge-light ml-4">{items ? items.length : 0} / {total}</span>
           </h2>
           <div className="Items m-3">
             {view}
@@ -59,14 +53,14 @@ class Corpora extends Component {
         return this._getItems();
         break;
       case "fragment":
-        return  <Fragment  from={this.state.fragments.length} items={this.state.fragments} viewpoint={this.props.viewpoint} />;
+        return  <Fragment  from={this.props.fragments.length} items={this.props.fragments} viewpoint={this.props.viewpoint} />;
         break;
       default:
         return (<p> arrête de jouer avec le code</p>)
     }
   }
   _getItems() {
-    return this.state.pictures.map(item =>
+    return this.props.pictures.map(item =>
         <Picture key={item.id} item={item}
           id={item.corpus+'/'+item.id} />
     );

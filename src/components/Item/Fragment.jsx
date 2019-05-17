@@ -4,15 +4,20 @@ export default class Fragment extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            texts: [],
             idTextToAnalyse: null
         };
         this.setState.bind();
     }
 
+    static getDerivedStateFromProps(nextProps, nextState) {
+      if(nextState.idTextToAnalyse) {
+        let found = nextProps.items.find((text) => text.id === nextState.idTextToAnalyse);
+        if(!found) return { idTextToAnalyse: null }
+      }
+      return false
+    }
     render() {
         const generatedTextDescription = this._generateTextDescription();
-        this.state.texts = this.props.items;
         const generatedTextFragment = this._generateTextFragment();
         const generateLink= this._generateLink();
         return (
@@ -40,7 +45,7 @@ export default class Fragment extends Component {
     _generateTextDescription(){
         const selectId =this.selectIdTextToAnalyse;
         const idTextToAnalyse = this.state.idTextToAnalyse;
-        return this.state.texts.map(text=>{
+        return this.props.items.map(text=>{
             const idIdentique = idTextToAnalyse === text.id;
             const class_name= idIdentique ? "d-table-row boder w-100 textSelected" : "d-table-row boder w-100";
             return(
@@ -66,7 +71,7 @@ export default class Fragment extends Component {
             )
         }
         else {
-            let fragments = this.state.texts.find((text)=>text.id===this.state.idTextToAnalyse);
+            let fragments = this.props.items.find((text)=>text.id===this.state.idTextToAnalyse);
             let fragementAttributs=Object.keys(fragments);
             let extractViewpoint={};
             fragementAttributs.forEach((key)=>{
@@ -95,7 +100,7 @@ export default class Fragment extends Component {
 
     _generateLink() {
         if (this.state.idTextToAnalyse !== null) {
-            let fragments = this.state.texts.find((text) => text.id === this.state.idTextToAnalyse);
+            let fragments = this.props.items.find((text) => text.id === this.state.idTextToAnalyse);
             return (
                 <div className="d-table-row boder w-100">
                     <div className="d-table-cell border">

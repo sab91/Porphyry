@@ -9,8 +9,6 @@ import Corpora from '../Corpora/Corpora.jsx';
 import Header from '../Header/Header.jsx';
 import ViewpointCreator from '../Viewpoint/ViewpointCreator.jsx';
 import Authenticated from '../Authenticated/Authenticated.jsx';
-import nuage from '../../images/logo-nuage.png'
-import baseLine from '../../images/baseline_reorder_black_18dp.png'
 import '../../styles/App.css';
 
 class Portfolio extends Component {
@@ -219,8 +217,25 @@ class Portfolio extends Component {
 
   _getCorpora() {
     let ids = this.state.corpora.map(c => c.id);
+    let pictures = [];
+    let fragments = [];
+    this.state.selectedItems.forEach((data)=>{
+      if (!['id', 'name', 'user'].includes(data)) {
+        if (!data.thumbnail || !data.thumbnail.length) {
+          fragments.push(data)
+        } else {
+          pictures.push(data);
+        }
+      }
+ });
     return (
-      <Corpora ids={ids} from={this.state.items.length} items={this.state.selectedItems} viewpoint={this.state.viewpoints}/>
+      <Corpora
+        ids={ids}
+        from={this.state.items.length}
+        pictures={pictures}
+        fragments={fragments}
+        viewpoint={this.state.viewpoints}
+      />
     );
   }
 }
