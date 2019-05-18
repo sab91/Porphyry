@@ -45,11 +45,13 @@ export default class Fragment extends Component {
     _generateTextDescription(){
         const selectId =this.selectIdTextToAnalyse;
         const idTextToAnalyse = this.state.idTextToAnalyse;
-        return this.props.items.map(text=>{
+        return this.props.items.map((text,id)=>{
             const idIdentique = idTextToAnalyse === text.id;
             const class_name= idIdentique ? "d-table-row boder w-100 textSelected" : "d-table-row boder w-100";
             return(
-                <div className={class_name} key={text.id} onClick={()=>selectId(text.id)} >
+                <div className={class_name}
+                     key={id}
+                     onClick={()=>selectId(text.id)} >
                     <div className="d-table-cell border">
                         <p><b>name :</b> {text.name}</p>
                     </div>
@@ -59,7 +61,7 @@ export default class Fragment extends Component {
     selectIdTextToAnalyse = (id)=>{
         window.scrollTo(0,0);
         this.setState({idTextToAnalyse:id});
-    }
+    };
     _generateTextFragment(){
         if (this.state.idTextToAnalyse === null){
             return (
