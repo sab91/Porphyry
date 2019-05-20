@@ -74,29 +74,16 @@ export default class Fragment extends Component {
         }
         else {
             let fragments = this.props.items.find((text)=>text.id===this.state.idTextToAnalyse);
-            let fragementAttributs=Object.keys(fragments);
-            let extractViewpoint={};
-            fragementAttributs.forEach((key)=>{
-                if (!['corpus','id','name'].includes(key)){
-                   if (fragments[key].text && fragments[key].topic) {
-                       fragments[key].topic.forEach((topicElement)=>{
-                           if(!(extractViewpoint[topicElement.viewpoint])) {
-                               extractViewpoint[topicElement.viewpoint] = [];
-                           }
-                            extractViewpoint[topicElement.viewpoint].push(fragments[key].text);
-                       })
-                   }
-                }
-            });
-            let fragmentView= Object.keys(extractViewpoint).map((key)=>(
-                <div className="d-table-row boder w-100">
-                    <div className="d-table-cell border">
-                        <b className="text-center">{this._getviewPointName(key)}</b>
-                        {extractViewpoint[key].map((text)=>(<p>{text}</p>))}
+            fragments = Object.values(fragments);
+            return fragments.map(
+                (fragment,idFragment)=> {
+                    return (
+                        <div key = {idFragment} className="d-table-row boder w-100">
+                            <div className="d-table-cell border">
+                                {fragment.text ? fragment.text.map((text,idText)=>(<p key = {idText}>{text}</p>)):null}
                     </div>
-                </div>
-            ));
-            return fragmentView;
+            </div>
+            )})
         }
     }
 
@@ -106,7 +93,7 @@ export default class Fragment extends Component {
             return (
                 <div className="d-table-row boder w-100">
                     <div className="d-table-cell border">
-                        {fragments.resource.map((link, indice) => (<a href={link}>lien numéro {indice + 1}</a>))}
+                        {fragments.resource.map((link, indice) => (<a key={indice} href={link}>lien numéro {indice + 1}</a>))}
                     </div>
                 </div>
             )
