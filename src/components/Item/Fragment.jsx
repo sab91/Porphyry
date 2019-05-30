@@ -21,7 +21,6 @@ export default class Fragment extends Component {
     render() {
         const generatedTextDescription = this._generateTextDescription();
         const generatedTextFragment = this._generateTextFragment();
-        const generateLink = this._generateLink();
         return (
             <div className="d-table w-100 border">
                 <div className="d-table-row border">
@@ -48,6 +47,13 @@ export default class Fragment extends Component {
         const selectId = this.selectIdTextToAnalyse;
         const idTextToAnalyse = this.state.idTextToAnalyse;
         return this.props.items.map((text, id) => {
+            let {resource} = text;
+            resource = resource ?
+                <a href={resource[0]}>
+                    <img style={{height: "15px", weight: "15px"}}
+                         alt="lien le texte d'origine"
+                         src={lien}/>
+                </a> : null;
             const idIdentique = idTextToAnalyse === text.id;
             const class_name = idIdentique ? "d-table-row boder w-100 textSelected" : "d-table-row boder w-100";
             return (
@@ -55,7 +61,7 @@ export default class Fragment extends Component {
                      key={id}
                      onClick={() => selectId(text.id)}>
                     <div className="d-table-cell border">
-                        <p><b>name :</b> {text.name}</p>
+                        <p><b>name :</b> {text.name} {resource}</p>
                     </div>
                 </div>
             )
@@ -64,18 +70,16 @@ export default class Fragment extends Component {
 
     selectIdTextToAnalyse = (id) => {
         window.scrollTo(0, 0);
-        if (id === this.state.idTextToAnalyse){
+        if (id === this.state.idTextToAnalyse) {
             this.setState({idTextToAnalyse: null})
-        }else {
+        } else {
             this.setState({idTextToAnalyse: id});
         }
     };
 
     _generateTextFragment() {
         if (this.state.idTextToAnalyse === null) {
-            return this.props.items.map(fragments=>{
-                let resource= fragments.resource;
-                resource =  resource ? <a href={resource[0]}><img style={{height:"15px",weight:"15px"}} alt="lien le texte d'origine" src={lien}/></a> : null
+            return this.props.items.map(fragments => {
                 fragments = Object.values(fragments);
                 return fragments.map(
                     (fragment, idFragment) => {
@@ -83,7 +87,7 @@ export default class Fragment extends Component {
                             <div key={idFragment} className="d-table-row boder w-100">
                                 <div className="d-table-cell border">
                                     {fragment.text ? fragment.text.map((text, idText) => (
-                                        <p key={idText}>{text} {resource}</p>)) : null}
+                                        <p key={idText}>{text} </p>)) : null}
                                 </div>
                             </div>
                         )
@@ -91,8 +95,6 @@ export default class Fragment extends Component {
             })
         } else {
             let fragments = this.props.items.find((text) => text.id === this.state.idTextToAnalyse);
-            let {resource} = fragments;
-            resource =  resource ? <a href={resource[0]}><img style={{height:"15px",weight:"15px"}} alt="lien le texte d'origine" src={lien}/></a> : null
             fragments = Object.values(fragments);
             return fragments.map(
                 (fragment, idFragment) => {
@@ -100,25 +102,11 @@ export default class Fragment extends Component {
                         <div key={idFragment} className="d-table-row boder w-100">
                             <div className="d-table-cell border">
                                 {fragment.text ? fragment.text.map((text, idText) => (
-                                    <p key={idText}>{text} {resource}</p>)) : null}
+                                    <p key={idText}>{text} </p>)) : null}
                             </div>
                         </div>
                     )
                 })
-        }
-    }
-
-    _generateLink() {
-        if (this.state.idTextToAnalyse !== null) {
-            let fragments = this.props.items.find((text) => text.id === this.state.idTextToAnalyse);
-            return (
-                <div className="d-table-row boder w-100">
-                    <div className="d-table-cell border">
-                        {fragments.resource.map((link, indice) => (
-                            <a key={indice} href={link}>lien numéro {indice + 1}</a>))}
-                    </div>
-                </div>
-            )
         }
     }
 }
