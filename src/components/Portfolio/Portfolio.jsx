@@ -62,10 +62,10 @@ class Portfolio extends Component {
     this._fetchAll().then(() => {
       let end=new Date().getTime();
       let elapsedTime=end-start;
-      console.log("elapsed Time ",elapsedTime);
+      //console.log("elapsed Time ",elapsedTime);
 
       let intervalTime=Math.max(10000,elapsedTime*5);
-      console.log("reload every ",intervalTime);
+      //console.log("reload every ",intervalTime);
       self._timer = setInterval(
         () => {
           self._fetchAll();
@@ -102,7 +102,7 @@ class Portfolio extends Component {
       let uri = '?' + queryString.stringify({
         t: this._toggleTopic(this.selection, t)
       });
-      return <span className="badge badge-pill badge-light TopicTag">
+      return <span key={t} className="badge badge-pill badge-light TopicTag">
         {topic.name} <Link to={uri} className="badge badge-pill badge-dark oi oi-x" title="Déselectionner"> </Link>
       </span>;
     });
@@ -132,6 +132,16 @@ class Portfolio extends Component {
   }
 
   _getItemTopicsPaths(item) {
+    if(!item.topic) {
+      let fragments = Object.values(item)
+      let paths = []
+      fragments.forEach(fragment => {
+        (fragment.topic || []).forEach(t => {
+          this._getTopicPath(t.id).forEach(p => p !== '' && paths.push(p))
+        })
+      })
+      return paths
+    }
     return (item.topic||[]).map(t => this._getTopicPath(t.id));
   }
 
@@ -145,7 +155,7 @@ class Portfolio extends Component {
 
   _updateSelectedItems() {
     let selectedItems = this.state.items
-      .filter(e => this._isSelected(e, this.selection));
+      .filter(e => this._isSelected(e));
     let topicsItems = new Map();
     for (let e of selectedItems) {
       for (let t of this._getRecursiveItemTopics(e)) {
