@@ -10,9 +10,6 @@ class Authenticated extends Component {
       user: '',
       ask: false
     }
-    this.handleAsk = this.handleAsk.bind(this)
-    this.handleLogin = this.handleLogin.bind(this)
-    this.handleLogout = this.handleLogout.bind(this)
   }
 
   render() {
@@ -49,18 +46,18 @@ class Authenticated extends Component {
     )
   }
 
-  handleAsk(e) {
+  handleAsk = e => {
     e.preventDefault()
     this.setState({ ask: true })
   }
 
-  handleLogin(e) {
+  handleLogin = e => {
     e.preventDefault()
     this._openSession()
     this.setState({ ask: false })
   }
 
-  handleLogout(e) {
+  handleLogout = e => {
     e.preventDefault()
     this._closeSession()
   }
