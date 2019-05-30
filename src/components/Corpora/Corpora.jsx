@@ -53,7 +53,6 @@ class Corpora extends Component {
     }
 
     render() {
-        let view = this._getView();
         const { fragments } = this.props;
         return (
             <div className="col-md-8 p-4">
