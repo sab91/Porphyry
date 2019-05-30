@@ -53,20 +53,18 @@ class Corpora extends Component {
     }
 
     render() {
-        const {items} = this.props;
         let view = this._getView();
-        let total = this.props.from;
-        let choiceView = this._choiceView();
+        const { fragments } = this.props;
         return (
             <div className="col-md-8 p-4">
-                {choiceView}
+                {this._choiceView()}
                 <div className="Subject">
                     <h2 className="h4 font-weight-bold text-center">
                         {this.props.ids.join(' + ')}
-                        <span className="badge badge-pill badge-light ml-4">{items ? items.length : 0} / {total}</span>
+                        <span className="badge badge-pill badge-light ml-4">{fragments ? fragments.length : 0} / {this.props.from}</span>
                     </h2>
                     <div className="Items m-3">
-                        {view}
+                        {this._getView()}
                     </div>
                 </div>
             </div>
