@@ -258,6 +258,7 @@ class Portfolio extends Component {
         pictures={pictures}
         fragments={fragments}
         viewpoint={this.state.viewpoints}
+        selection={this.selection}
       />
     )
   }
