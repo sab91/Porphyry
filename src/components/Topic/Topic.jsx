@@ -6,7 +6,6 @@ import queryString from 'query-string'
 class Topic extends Component {
   constructor(props) {
     super()
-    this.handleCollapse = this.handleCollapse.bind(this)
     let hasSubtopics = (props.topics[props.id].narrower || []).length
     this.state = {
       fold: hasSubtopics ? 'Closed' : ''
@@ -62,7 +61,7 @@ class Topic extends Component {
       ))
   }
 
-  handleCollapse(e) {
+  handleCollapse = (e) => {
     e.preventDefault()
     this.setState({ fold: fold(this.state.fold) })
   }

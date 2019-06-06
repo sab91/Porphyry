@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import by from 'sort-by'
-import Topic from '../Topic/Topic.jsx'
+import Topic from '../Topic/Topic'
+import Cloud from '../Cloud/Cloud'
 
 class Viewpoint extends Component {
   render() {
-    let topics = this._getTopics()
-    let outliner = this._getOutliner()
+    const topics = !this.props.cloudView ? this._getTopics() : null
+    const outliner = this._getOutliner()
     return (
       <div>
         <h3 className='h4'>
@@ -19,7 +20,15 @@ class Viewpoint extends Component {
         </h3>
         <hr />
         <div className='Topics'>
-          <ul>{topics}</ul>
+          {!this.props.cloudView ? (
+            <ul>{topics}</ul>
+          ) : (
+            <Cloud
+              selection={this.props.selection}
+              viewpoint={this.props.viewpoint}
+              topicsItems={this.props.topicsItems}
+            />
+          )}
         </div>
       </div>
     )

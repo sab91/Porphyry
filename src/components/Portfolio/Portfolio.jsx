@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import by from 'sort-by'
 import queryString from 'query-string'
 import Hypertopic from 'hypertopic'
+import Switch from 'react-switch'
 import conf from '../../config/config.json'
 import Viewpoint from '../Viewpoint/Viewpoint.jsx'
 import Corpora from '../Corpora/Corpora.jsx'
@@ -19,7 +20,8 @@ class Portfolio extends Component {
       corpora: [],
       items: [],
       selectedItems: [],
-      topicsItems: new Map()
+      topicsItems: new Map(),
+      cloudView: false
     }
     this.user = conf.user || window.location.hostname.split('.', 1)[0]
     this._updateSelection()
@@ -40,7 +42,23 @@ class Portfolio extends Component {
           <div className='App-content row'>
             <div className='col-md-4 p-4'>
               <div className='Description'>
-                <h2 className='h4 font-weight-bold text-center'>
+                <h2
+                  className='h4 font-weight-bold text-center'
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-evenly'
+                  }}
+                >
+                  <Switch
+                    onChange={e => {
+                      this.setState({ cloudView: e })
+                    }}
+                    checked={this.state.cloudView}
+                    uncheckedIcon={false}
+                    checkedIcon={false}
+                    onColor='#aaa'
+                  />
                   Points de vue
                 </h2>
                 <div className='p-3'>
@@ -233,6 +251,7 @@ class Portfolio extends Component {
           viewpoint={v}
           selection={this.selection}
           topicsItems={this.state.topicsItems}
+          cloudView={this.state.cloudView}
         />
       </div>
     ))
