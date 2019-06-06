@@ -7,7 +7,6 @@ export default class Fragment extends Component {
     this.state = {
       idTextToAnalyse: null
     }
-    this.setState.bind()
   }
 
   static getDerivedStateFromProps(nextProps, nextState) {
@@ -90,9 +89,23 @@ export default class Fragment extends Component {
   }
 
   _generateTextFragment() {
+
     if (this.state.idTextToAnalyse === null) {
-      return this.props.items.map(fragments => {
-        fragments = Object.values(fragments)
+      let fragmentSelect = this.props.items.map(fragment=>{return Object.values(fragment)})
+      if(this.props.selection.length !==0) {
+        fragmentSelect = fragmentSelect.map(fragments=>{
+          return fragments.filter(fragment=>{
+            return  this.props.selection.every(selection=>{
+              if (fragment.topic){
+                return fragment.topic.find(t=>{
+                  return t.id === selection
+                })
+              }
+            })
+          })
+        })
+      }
+      return fragmentSelect.map(fragments => {
         return fragments.map((fragment, idFragment) => {
           return (
             <div key={idFragment} className='d-table-row boder w-100'>
@@ -111,8 +124,19 @@ export default class Fragment extends Component {
       let fragments = this.props.items.find(
         text => text.id === this.state.idTextToAnalyse
       )
-      fragments = Object.values(fragments)
-      return fragments.map((fragment, idFragment) => {
+      let fragmentSelect = Object.values(fragments);
+      if(this.props.selection.length !==0) {
+        fragmentSelect = fragmentSelect.filter(fragments=>{
+          return  this.props.selection.every(selection=>{
+            if(fragments.topic){
+              return fragments.topic.find(t=>{
+                return t.id === selection
+              })
+            }
+          })
+        })
+      }
+      return fragmentSelect.map((fragment, idFragment) => {
         return (
           <div key={idFragment} className='d-table-row boder w-100'>
             <div className='d-table-cell border'>

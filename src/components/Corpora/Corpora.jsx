@@ -77,6 +77,7 @@ class Corpora extends Component {
             from={this.props.fragments.length}
             items={this.props.fragments}
             viewpoint={this.props.viewpoint}
+            selection={this.props.selection}
           />
         )
       default:
