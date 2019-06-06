@@ -375,3 +375,22 @@ ul.Outliner,
 .btn:not(.btn-xs) .oi {
   vertical-align: middle;
 }
+.tableFragment{
+  display: table;
+}
+
+.tableFragment > div{
+  display: table-column;
+}
+.textSelected {
+  background-color: #FECCCC ;
+}
+.buttonView {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+  color: ivory;
+}
