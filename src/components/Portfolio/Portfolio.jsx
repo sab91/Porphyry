@@ -58,6 +58,7 @@ class Portfolio extends Component {
                     uncheckedIcon={false}
                     checkedIcon={false}
                     onColor='#aaa'
+                    className={'switch'}
                   />
                   Points de vue
                 </h2>
