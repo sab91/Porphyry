@@ -2,7 +2,8 @@ require 'capybara/cucumber'
 require 'selenium/webdriver'
 
 Capybara.run_server = false
-Capybara.default_driver = :selenium_chrome_headless
+Capybara.default_driver = :cuprite
+Capybara.javascript_driver = :cuprite
 Capybara.app_host = "http://localhost:3000"
 Capybara.default_max_wait_time = 10
 

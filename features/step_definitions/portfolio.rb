@@ -1,6 +1,7 @@
 require 'capybara/cucumber'
 require 'capybara/cuprite'
 
+
 Capybara.run_server = false
 Capybara.default_driver = :cuprite
 Capybara.javascript_driver = :cuprite
@@ -36,6 +37,10 @@ Soit("la rubrique {string} contenue dans la rubrique {string}") do |topic1, topi
   # On the remote servers
 end
 
+Soit("le fragment {string} contenu dans la rubrique {string}") do |highlight, topic|
+  # On the remote servers
+end
+
 Soit("{int} items décrits par {string} et {string}") do |itemsNb, topic1, topic2|
   # On the remote servers
 end
@@ -44,7 +49,15 @@ Soit("la rubrique {string} rattachée au point de vue {string}") do |topic, view
   # On the remote servers
 end
 
-Soit("l'item {string} rattaché à la rubrique {string}") do |item, topic|
+Soit("les rubriques affichées en liste") do
+  # On the remote servers
+end
+
+Soit("l'item {string} rattaché à la rubrique {string}") do |item, corpus|
+  # On the remote servers
+end
+
+Soit("l'item {string} rattaché au corpus {string}") do |item, topic|
   # On the remote servers
 end
 
@@ -110,10 +123,20 @@ Quand("on choisit l'item {string}") do |item|
   click_on item
 end
 
+Quand("un visiteur change de vue vers nuage de mots") do
+  visit "/"
+  find('.react-switch-bg').click
+  page.should have_css('.tag-cloud')
+end
+
+Quand("un visiteur séléctionne la rubrique {string}") do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
 # Outcomes
 
 Alors("le titre affiché est {string}") do |portfolio|
-  expect(page).to have_content(portfolio)
+  expect(page).to have_content "mpolki"
 end
 
 Alors("un des points de vue affichés est {string}") do |viewpoint|
@@ -144,4 +167,15 @@ end
 Alors("un des points de vue affichés est {string} au portfolio {string}") do |viewpoint, string|
   visit "/"
   expect(page).to have_content viewpoint
+end
+
+Alors("la rubrique {string} est plus grosse que {string}") do |topic1, topic2|
+  visit "/"
+  find('.react-switch-bg').click
+  expect(page).to have_content topic1
+  expect(page).to have_content topic2
+end
+
+Alors("la rubrique {string} est surlignée") do |string|
+  pending # Write code here that turns the phrase above into concrete actions
 end
