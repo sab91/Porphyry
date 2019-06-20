@@ -43,8 +43,8 @@ class Cloud extends Component {
       })
     return (
       <TagCloud
-        minSize={12}
-        maxSize={35}
+        minSize={10}
+        maxSize={25}
         shuffle={false}
         tags={alltopics}
         disableRandomColor

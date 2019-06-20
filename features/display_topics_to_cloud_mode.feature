@@ -10,13 +10,12 @@ Soit l'item "David1" rattaché au corpus "enseignants-décrocheurs"
 Soit l'item "David2" rattaché au corpus "enseignants-décrocheurs"
 Soit l'item "Karine" rattaché au corpus "enseignants-décrocheurs"
 
-Soit le point de vue "Décrocher (selon Aurélien)" rattaché au portfolio "alice"
-Soit la rubrique "je ne fonctionne plus" rattachée au point de vue "Décrocher (selon Aurélien)"
-Soit la rubrique "c'est absurde" rattachée au point de vue "Décrocher (selon Aurélien)"
+Soit le point de vue "Grille d'analyse du SI" rattaché au portfolio "alice"
+Soit la rubrique "Action" rattachée au point de vue "Grille d'analyse du SI"
+Soit la rubrique "Acteur" rattachée au point de vue "Grille d'analyse du SI"
 
-Soit le fragment "je ne dors plus" contenu dans la rubrique "je ne fonctionne plus"
-Soit le fragment "n'a pas le droit" contenu dans la rubrique "je ne fonctionne plus"
-Soit le fragment "par pur plaisir" contenu dans la rubrique "c'est absurde"
+Soit le fragment "regarder la télévision" contenu dans la rubrique "Action"
+Soit le fragment "mes collègues" contenu dans la rubrique "Acteur"
 
 Soit les rubriques affichées en liste
 
@@ -29,5 +28,6 @@ Scénario: Switcher vers la vue nuage de mots
 Scénario: Sélectionner une catégorie du nuage de mot
 
    Soit "alice" le portfolio ouvert
-   Quand un visiteur séléctionne la rubrique "je ne fonctionne plus"
-   Alors la rubrique "je ne fonctionne plus" est surlignée
+   Et la vue nuage de mot est séléctionnée
+   Quand un visiteur séléctionne la rubrique "Action"
+   Alors la rubrique "Action" est surlignée

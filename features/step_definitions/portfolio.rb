@@ -50,14 +50,11 @@ Soit("la rubrique {string} rattachée au point de vue {string}") do |topic, view
 end
 
 Soit("les rubriques affichées en liste") do
-  # On the remote servers
+    visit "/"
+    expect(page).to have_css('.Topics ul')
 end
 
 Soit("l'item {string} rattaché à la rubrique {string}") do |item, corpus|
-  # On the remote servers
-end
-
-Soit("l'item {string} rattaché au corpus {string}") do |item, topic|
   # On the remote servers
 end
 
@@ -85,7 +82,6 @@ Soit("{string} la valeur de l'attribut {string} de l'item {string}") do |value, 
    # On the remote servers
 end
 
-# Events
 Soit("les rubriques {string} sont sélectionnées") do |topics|
   first = true
   uri = "/?"
@@ -102,7 +98,11 @@ Soit("les rubriques {string} sont sélectionnées") do |topics|
 end
 
 Soit("la liste des rubriques sélectionnées est vide") do
-  visit "/"
+  # on the remote servers
+end
+
+Soit("la vue nuage de mot est séléctionnée") do
+  find('.react-switch-bg').click
 end
 
 # Events
@@ -124,13 +124,12 @@ Quand("on choisit l'item {string}") do |item|
 end
 
 Quand("un visiteur change de vue vers nuage de mots") do
-  visit "/"
   find('.react-switch-bg').click
-  page.should have_css('.tag-cloud')
+  expect(page).to have_css('.tag-cloud')
 end
 
-Quand("un visiteur séléctionne la rubrique {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+Quand("un visiteur séléctionne la rubrique {string}") do |topic1|
+   click_link(topic1, :text => topic1 )
 end
 
 # Outcomes
@@ -170,12 +169,13 @@ Alors("un des points de vue affichés est {string} au portfolio {string}") do |v
 end
 
 Alors("la rubrique {string} est plus grosse que {string}") do |topic1, topic2|
-  visit "/"
-  find('.react-switch-bg').click
-  expect(page).to have_content topic1
-  expect(page).to have_content topic2
+    find('a span',text: "Action", match: :prefer_exact).click
+    # page.save_screenshot("test.png")
+    node1 = find('a span',text: topic1, match: :prefer_exact).style('font-size')['font-size'].split('px')[0].to_i
+    node2 = find('a span',text: topic2, match: :prefer_exact).style('font-size')['font-size'].split('px')[0].to_i
+    expect(node1).to be > node2
 end
 
-Alors("la rubrique {string} est surlignée") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+Alors("la rubrique {string} est surlignée") do |topic|
+  expect(find('a span',text: topic, match: :prefer_exact).style('background-color')['background-color']).to eq('rgba(238, 170, 51, 0.6)')
 end
