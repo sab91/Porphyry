@@ -105,6 +105,18 @@ Soit("la vue nuage de mot est séléctionnée") do
   find('.react-switch-bg').click
 end
 
+Soit("l'item {string} rattaché au corpus {string}") do |string, string2|
+   # On the remote servers
+end
+
+Soit("le point de vue {string} rattaché à l'item {string}") do |string, string2|
+   # On the remote servers
+end
+
+Soit("le fragment {string} rattaché à la rubrique {string}") do |string, string2|
+   # On the remote servers
+end
+
 # Events
 
 Quand("un visiteur ouvre la page d'accueil du site") do
@@ -132,10 +144,19 @@ Quand("un visiteur séléctionne la rubrique {string}") do |topic1|
    click_link(topic1, :text => topic1 )
 end
 
+Quand("l'item {string} est selectionné") do |item|
+   find('.item', text: item).click
+   expect(page).to have_selector('.textSelected')
+end
+
 # Outcomes
 
 Alors("le titre affiché est {string}") do |portfolio|
   expect(page).to have_content "mpolki"
+end
+
+Alors("la rubrique {string} est affichée") do |category|
+   expect(page).to have_content category
 end
 
 Alors("un des points de vue affichés est {string}") do |viewpoint|
@@ -178,4 +199,28 @@ end
 
 Alors("la rubrique {string} est surlignée") do |topic|
   expect(find('a span',text: topic, match: :prefer_exact).style('background-color')['background-color']).to eq('rgba(238, 170, 51, 0.6)')
+end
+
+Alors("le fragment {string} est affiché") do |fragment|
+   expect(page).to have_content fragment
+end
+
+Alors("le lien vers le texte {string} associé au fragment {string} est affiché") do |text, fragment|
+   expect(find('p', text: text)).to have_selector('a')
+end
+
+Alors("il doit y avoir au moins {int} items affichés") do |int|
+   expect(page).to have_selector('.Items .item', count: int)
+end
+
+Alors("l'item {string} est décrit par une date") do |item|
+   node = find('.Items .item .name', text: item)
+   parent = node.find(:xpath, '..')
+   expect(parent).to have_selector('.date')
+end
+
+Alors("l'item {string} est décrit par un auteur") do |item|
+   node = find('.Items .item .name', text: item)
+   parent = node.find(:xpath, '..')
+   expect(parent).to have_selector('.author')
 end

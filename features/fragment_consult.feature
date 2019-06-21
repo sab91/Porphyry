@@ -10,8 +10,8 @@ Fonctionnalité: Consulter les items en mode fragment
     Soit l'item "Karine" rattaché au corpus "enseignants-decrocheurs"
 
     Soit le point de vue "Sociologie de la douleur" rattaché à l'item "David1"
-    Soit la catégorie "souffrir de plus en plus" rattaché au point de vue "Sociologie de la douleur"
-    Soit le fragment "Quand je suis rentré comme professeur, j'étais un h" rattaché à la catégorie "souffrir de plus en plus"
+    Soit la rubrique "souffrir de plus en plus" rattachée au point de vue "Sociologie de la douleur"
+    Soit le fragment "Quand je suis rentré comme professeur, j'étais un h" rattaché à la rubrique "souffrir de plus en plus"
 
   Scénario: Afficher la liste des items
     Soit "alice" le portfolio ouvert
@@ -23,6 +23,6 @@ Fonctionnalité: Consulter les items en mode fragment
     Soit "alice" le portfolio ouvert
     Et l'item "David1" est affiché
     Quand l'item "David1" est selectionné
-    Alors la catégorie "souffrir de plus en plus" est affiché
+    Alors la rubrique "souffrir de plus en plus" est affichée
     Et le fragment "Quand je suis rentré comme professeur, j'étais un h" est affiché
-    Et le lien vers le texte associé au fragment "Quand je suis rentré comme professeur, j'étais un h" est affiché
+    Et le lien vers le texte "David1" associé au fragment "Quand je suis rentré comme professeur, j'étais un h" est affiché
