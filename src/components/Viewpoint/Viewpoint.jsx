@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
-import by from 'sort-by'
-import Topic from '../Topic/Topic'
-import Cloud from '../Cloud/Cloud'
+import React, { Component } from 'react';
+import by from 'sort-by';
+import Topic from '../Topic/Topic';
+import Cloud from '../Cloud/Cloud';
 
 class Viewpoint extends Component {
   render() {
-    const topics = !this.props.cloudView ? this._getTopics() : null
-    const outliner = this._getOutliner()
+    const topics = !this.props.cloudView ? this._getTopics() : null;
+    const outliner = this._getOutliner();
     return (
       <div>
-        <h3 className='h4'>
+        <h3 className="h4">
           {this.props.viewpoint.name}
           <a
-            className='outliner btn btn-sm btn-light float-right'
+            className="outliner btn btn-sm btn-light float-right"
             href={outliner}
           >
-            <span className='oi oi-pencil'> </span>
+            <span className="oi oi-pencil"> </span>
           </a>
         </h3>
         <hr />
-        <div className='Topics'>
+        <div className="Topics">
           {!this.props.cloudView ? (
             <ul>{topics}</ul>
           ) : (
@@ -31,7 +31,7 @@ class Viewpoint extends Component {
           )}
         </div>
       </div>
-    )
+    );
   }
 
   _getTopics() {
@@ -46,13 +46,13 @@ class Viewpoint extends Component {
           selection={this.props.selection}
           topicsItems={this.props.topicsItems}
         />
-      ))
+      ));
   }
 
   _getOutliner() {
-    let uri = '/viewpoint/' + this.props.viewpoint.id
-    return uri
+    let uri = '/viewpoint/' + this.props.viewpoint.id;
+    return uri;
   }
 }
 
-export default Viewpoint
+export default Viewpoint;
